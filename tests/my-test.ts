@@ -2,7 +2,7 @@ import { test as base, request } from '@playwright/test';
 import { OpenWeatherClient } from '../apis/open-weather/open-weather-client';
 import { TvMazeClient } from '../apis/open-weather/TV-maze-client';
 import 'dotenv/config'
-import { valoriAcademyPlanner } from '../apis/open-weather/Academy-client';
+import { valoriAcademyPlanner } from '../apis/open-weather/Academy/Academy-client';
 
 type MyFixtures = {
     openWeatherClient: OpenWeatherClient;
