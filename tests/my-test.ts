@@ -1,13 +1,15 @@
 import { test as base, request } from '@playwright/test';
 import { OpenWeatherClient } from '../apis/open-weather/open-weather-client';
 import { TvMazeClient } from '../apis/open-weather/TV-maze-client';
+import { BigTomClient } from '../apis/open-weather/big-tom-client';
 import 'dotenv/config'
 import { valoriAcademyPlanner } from '../apis/open-weather/Academy/Academy-client';
 
 type MyFixtures = {
     openWeatherClient: OpenWeatherClient;
     tvMazeClient:TvMazeClient;
-    valoriAcademyPlanner:valoriAcademyPlanner
+    valoriAcademyPlanner:valoriAcademyPlanner;
+    BigTomClient:BigTomClient;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -36,8 +38,16 @@ export const test = base.extend<MyFixtures>({
         });
         await use(new valoriAcademyPlanner(context));
         context.dispose();
+    }, 
+    BigTomClient: async({}, use) =>{
+        const context = await request.newContext({
+            baseURL: 'https://skillup.wiremockapi.cloud'
+        });
+
+        await use(new BigTomClient(context));
+        context.dispose;
     }
 
-});
+})
 
 export { expect } from '@playwright/test';
